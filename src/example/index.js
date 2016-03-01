@@ -8,9 +8,9 @@ import 'material-design-lite/material.min';
 import logger from '../logger/dispatch-logger';
 import dispatcher from './dispatcher-mock';
 import stores from './store-mock';
+import Question from '../components/question';
+import DevPanel from '../components/dev-panel';
 logger(dispatcher, () => stores);
-dispatcher.dispatch({action: {type:'DON_UPDATE', data: 'DON_UPDATO', source: 'sourceAction'}});
-dispatcher.dispatch({action: {type:'DON_UPDATE', data: 'DON_UPDATO', source: 'sourceAction'}});
 dispatcher.dispatch({action: {type:'DON_UPDATE', data: 'DON_UPDATO', source: 'sourceAction'}});
 
 // Create the react component when the DOM is loaded.
@@ -45,6 +45,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
             </div>
             <main className='mdl-layout__content'>
               <MyComponent />
+              <DevPanel project='focus_devtools' user='pierr'>
+                <Question sendGrade={grade => console.log('gradeToSend', grade)}/>
+              </DevPanel>
             </main>
             </div>,
     rootElement);

@@ -37,4 +37,4 @@ const createStoreLogger = (dispatcher, getStores) => {
   });
 };
 
-export default createStoreLogger;
+export default createStoreLogger ;
