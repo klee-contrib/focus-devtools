@@ -1,79 +1,99 @@
 import fetch from 'isomorphic-fetch';
-console.log('actions');
+import {loadGrades as loadGradesSvc, loadProjects as loadProjectsSvc, saveAnswer as saveAnswerSvc} from '../example/firebase';
 
 //
-// LOAD
+// SAVE
 //
-export const REQUEST_LOAD_ENTITY = 'REQUEST_LOAD_ENTITY';
-export const RECEIVE_LOAD_ENTITY = 'RECEIVE_LOAD_ENTITY';
-export const ERROR_LOAD_ENTITY = 'ERROR_LOAD_ENTITY';
+export const REQUEST_SAVE_ANSWER = 'REQUEST_SAVE_ANSWER';
+export const RECEIVE_SAVE_ANSWER = 'RECEIVE_SAVE_ANSWER';
+export const ERROR_SAVE_ANSWER = 'ERROR_SAVE_ANSWER';
 
-function requestLoadEntity({id}){
-  return {type: REQUEST_LOAD_ENTITY, payload: {id}};
+function requestSaveAnswer(answer){
+  return {type: REQUEST_SAVE_ANSWER, payload: answer};
 }
 
-function receiveLoadEntity(jsonEntity){
-  return {type: RECEIVE_LOAD_ENTITY, payload: jsonEntity};
+function receiveSaveAnswer(jsonEntity){
+  return {type: RECEIVE_SAVE_ANSWER, payload: jsonEntity};
 }
 
-function errorLoadEntity(error){
-  return {type: ERROR_LOAD_ENTITY, payload: error};
+function errorSaveAnswer(error){
+  return {type: ERROR_SAVE_ANSWER, payload: error};
 }
 
-export function loadEntity({id}){
+export function saveAnswer(project, answer){
   return async dispatch => {
     try{
-      dispatch(requestLoadEntity({id}));
-      const response = await fetch(`http://localhost:9999/x/entity/${id}`)
-      const data = await response.json();
-      dispatch(receiveLoadEntity(data));
+      console.log('save', project, answer);
+      dispatch(requestSaveAnswer(answer));
+      const response = await saveAnswerSvc(project, answer);
+      const data = await response;
+      dispatch(receiveSaveAnswer(data));
     }
     catch(err){
-      dispatch(errorLoadEntity(err));
+      dispatch(errorSaveAnswer(err));
     }
   }
 }
 
 
-//
-// SAVE
-//
+export const REQUEST_LOAD_ANSWERS = 'REQUEST_LOAD_ANSWERS';
+export const RECEIVE_LOAD_ANSWERS = 'RECEIVE_LOAD_ANSWERS';
+export const ERROR_LOAD_ANSWERS = 'ERROR_LOAD_ANSWERS';
 
-export const REQUEST_SAVE_ENTITY = 'REQUEST_SAVE_ENTITY';
-export const RECEIVE_SAVE_ENTITY = 'RECEIVE_SAVE_ENTITY';
-export const ERROR_SAVE_ENTITY = 'ERROR_SAVE_ENTITY';
-
-function requestSaveEntity({id}){
-  return {type: REQUEST_SAVE_ENTITY, payload: {id}};
+function requestLoadAnswers(){
+  return {type: REQUEST_LOAD_ANSWERS};
 }
 
-function receiveSaveEntity(jsonEntity){
-  return {type: RECEIVE_SAVE_ENTITY, payload: jsonEntity};
+function receiveLoadAnswer(jsonEntity){
+  return {type: RECEIVE_LOAD_ANSWERS, payload: jsonEntity};
 }
 
-function errorSaveEntity(error){
-  return {type: ERROR_SAVE_ENTITY, payload: error};
+function errorLoadAnswers(error){
+  return {type: ERROR_LOAD_ANSWERS, payload: error};
 }
 
-export function saveEntity(id, entityJSON){
-  console.log('save', entityJSON);
+export function loadAnswers(){
   return async dispatch => {
     try{
-      dispatch(requestSaveEntity({id}));
-      const response = await fetch(
-        `http://localhost:9999/x/entity/${id}`, {
-          method: 'PUT',
-          body: JSON.stringify(entityJSON),
-          headers: new Headers({
-		          'Content-Type': 'application/json'
-          })
-        }
-      );
-      const data = await response.json();
-      dispatch(receiveSaveEntity(data));
+      dispatch(requestLoadAnswers());
+      const response = await loadGradesSvc();
+      const data = await response;
+      dispatch(receiveLoadAnswer(data));
     }
     catch(err){
-      dispatch(errorSaveEntity(err));
+      dispatch(errorLoadAnswers(err));
+    }
+  }
+}
+
+
+
+export const REQUEST_LOAD_PROJECTS = 'REQUEST_LOAD_PROJECTS';
+export const RECEIVE_LOAD_PROJECTS = 'RECEIVE_LOAD_PROJECTS';
+export const ERROR_LOAD_PROJECTS = 'ERROR_LOAD_PROJECTS';
+
+function requestLoadProjects(){
+  return {type: REQUEST_LOAD_PROJECTS};
+}
+
+function receiveLoadProjects(jsonEntity){
+  return {type: RECEIVE_LOAD_PROJECTS, payload: jsonEntity};
+}
+
+function errorLoadProjects(error){
+  return {type: ERROR_LOAD_PROJECTS, payload: error};
+}
+
+export function loadProjects(){
+  return async dispatch => {
+    try{
+      dispatch(requestLoadProjects());
+      const response = await loadProjectsSvc();
+      const data = await response;
+      dispatch(receiveLoadProjects(data));
+    }
+    catch(err){
+      dispatch(errorLoadProjects(err));
     }
   }
 }
