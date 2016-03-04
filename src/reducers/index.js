@@ -1,24 +1,10 @@
-import {RECEIVE_SAVE_ANSWER} from '../actions/entity';
+import { combineReducers } from 'redux';
+import  settings from './dev-tools-settings-reducer';
+import  pushQuestion from './push-question-reducer';
 
-const DEFAULT_STATE = {
-  isQuestionVisible: true
-};
+const devToolsReducer = combineReducers({
+  settings: settings,
+  pushQuestion: pushQuestion
+});
 
-
-function dxReducer(state = DEFAULT_STATE, {type, payload}){
- const {data} = state;
- switch (type) {
-  case RECEIVE_SAVE_ANSWER:
-      return { ...state, grades: payload, isQuestionVisible: false};
-  default:
-      return state
-  }
-}
-
-function surveyReducer(state, action){
-
-}
-
-
-
-export default dxReducer;
+export default devToolsReducer;

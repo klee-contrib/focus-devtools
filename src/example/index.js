@@ -6,7 +6,7 @@ import 'material-design-icons-iconfont/dist/material-design-icons.css';
 import 'material-design-lite/material.css';
 import 'material-design-lite/material.min';
 import {init, populate} from './firebase';
-import {saveAnswer} from '../actions/entity';
+import {saveAnswer, initQuestion} from '../actions/push-question-actions';
 import logger from '../logger/dispatch-logger';
 import dispatcher from './dispatcher-mock';
 import stores from './store-mock';
@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                   <MyComponent />
                   <DevPanel project='focus_devtools' user='pierr'>
                     <h2>{'Comment ça se passe avec Focus sur votre projet ?'}</h2>
-                    <Question sendGrade={grade => saveAnswer('focus_devtools', {date: new Date().getTime(), user: 'pierr', grade: grade})}/>
+                    <Question initQuestion={() => initQuestion()} sendGrade={grade => saveAnswer('focus_devtools', {date: new Date().getTime(), user: 'pierr', grade: grade})}/>
                   </DevPanel>
               </main>
             </StoreProvider>
