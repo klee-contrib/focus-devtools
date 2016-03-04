@@ -5,14 +5,19 @@ import MyComponent from '../';
 import 'material-design-icons-iconfont/dist/material-design-icons.css';
 import 'material-design-lite/material.css';
 import 'material-design-lite/material.min';
+import {init, populate} from './firebase';
+import {saveAnswer} from '../actions/entity';
 import logger from '../logger/dispatch-logger';
 import dispatcher from './dispatcher-mock';
 import stores from './store-mock';
+import store from '../store';
 import Question from '../components/question';
 import DevPanel from '../components/dev-panel';
+import { Provider as StoreProvider} from 'react-redux';
+
+init(() => populate(false));
 logger(dispatcher, () => stores);
 dispatcher.dispatch({action: {type:'DON_UPDATE', data: 'DON_UPDATO', source: 'sourceAction'}});
-
 // Create the react component when the DOM is loaded.
 document.addEventListener('DOMContentLoaded', (event) => {
 
@@ -43,12 +48,15 @@ document.addEventListener('DOMContentLoaded', (event) => {
               <a className='mdl-navigation__link' href=''>Link</a>
             </nav>
             </div>
-            <main className='mdl-layout__content'>
-              <MyComponent />
-              <DevPanel project='focus_devtools' user='pierr'>
-                <Question sendGrade={grade => console.log('gradeToSend', grade)}/>
-              </DevPanel>
-            </main>
+            <StoreProvider store={store}>
+              <main className='mdl-layout__content'>
+                  <MyComponent />
+                  <DevPanel project='focus_devtools' user='pierr'>
+                    <h2>{'Comment ça se passe avec Focus sur votre projet ?'}</h2>
+                    <Question sendGrade={grade => saveAnswer('focus_devtools', {date: new Date().getTime(), user: 'pierr', grade: grade})}/>
+                  </DevPanel>
+              </main>
+            </StoreProvider>
             </div>,
     rootElement);
 });
