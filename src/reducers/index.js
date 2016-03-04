@@ -1,13 +1,22 @@
+import {RECEIVE_SAVE_ANSWER} from '../actions/entity';
 
 const DEFAULT_STATE = {
-  isQuestionVisible: false
+  isQuestionVisible: true
 };
-export default function dxReducer(state = DEFAULT_STATE, {type, payload}){
+
+
+function dxReducer(state = DEFAULT_STATE, {type, payload}){
  const {data} = state;
  switch (type) {
+  case RECEIVE_SAVE_ANSWER:
+      return { ...state, grades: payload, isQuestionVisible: false};
   default:
       return state
   }
+}
+
+function surveyReducer(state, action){
+
 }
 
 
