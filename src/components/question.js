@@ -1,4 +1,6 @@
 import React, {Component, PropTypes} from 'react';
+import {connect as connectToReduxStore } from 'react-redux';
+import Code from './code'
 class Question extends Component {
   constructor(props){
     super(props);
@@ -13,10 +15,22 @@ class Question extends Component {
     console.log('answser', value);
   }
   onSend(){
-    this.props.sendGrade(this.state.grade);
+    this.props.dispatch(this.props.sendGrade(this.state.grade));
   }
   render(){
-    return  <Grade value={this.state.grade} maxGrade={10} onChange={value => this.setGrade(value)} onClick={value => this.setGrade(value)} onSend={() => this.onSend()}/>
+    const {isQuestionVisible} = this.props;
+    const codeProps = {state: this.state, props: this.props}
+    return  (
+      <div>
+        {
+          isQuestionVisible ?
+            <Grade value={this.state.grade} maxGrade={5} onChange={value => this.setGrade(value)} onClick={value => this.setGrade(value)} onSend={() => this.onSend()} />
+          :
+            <Average grades={this.props.storeData.grades || []}/>
+        }
+        <Code {...codeProps} />
+      </div>
+    )
   }
 }
 
@@ -26,40 +40,44 @@ Question.propTypes = {
   sendGrade: PropTypes.func.isRequired
 }
 
+function Average({grades}){
+  const NB_GRADES = grades.length;
+console.log('Grades', grades);
+  const average = NB_GRADES > 0 ? grades.reduce((res, current) => res + current.grade, 0)/ NB_GRADES : '-';
+  return (
+    <Button onClick={() =>alert(`La note moyenne est ${average}`)}>
+      {average}
+    </Button>
+  );
+}
+Average.displayName = 'Average';
+Average.propTypes = {
+  grades: PropTypes.array.isRequired
+}
+
 function Icon({children}){
   return  <i className='material-icons'>{children}</i>;
 }
 
-function Grade({value, maxGrade, onChange, onClick, onSend}){
+function Grade({value, maxGrade, onChange, onClick, onSend, iconName}){
   return (
-    <div data-focus='question' style={{display: 'flex'}}>
-      {
-        Array.from(Array(maxGrade).keys()).map(
-          gd => <div key={gd} onClick={() => onClick(gd)} onMouseHover={() => onChange(gd)}><Icon>{gd <= value ? 'favorite' : 'favorite_border'}</Icon></div>
-        )
-      }
-      <ButtonFab onClick={()=>{onSend()}}><Icon>send</Icon></ButtonFab>
-
-    </div>);
+    <div data-focus='question' style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+      <div style={{display: 'flex', width: '40%', maxWidth: '500px'}}>
+        {
+          Array.from(Array(maxGrade).keys()).map(
+            gd => <Button key={gd} onClick={() => onClick(gd)}><Icon>{gd <= value ? iconName : `${iconName}_border`}</Icon></Button>
+          )
+        }
+      </div>
+      <Button style={{width: '20%'}} isColored={true} type='raised' onClick={()=>{onSend()}}><Icon>send</Icon></Button>
+    </div>
+  );
 }
-
-function ButtonFab({children, onClick}){
-  return (
-    <button onClick={onClick} className="mdl-button mdl-button--fab mdl-button--colored">
-      {children}
-    </button>
-  )
-}
-ButtonFab.displayName = 'ButtonFab';
-ButtonFab.propTypes = {
-  onClick: PropTypes.func.isRequired
-}
-
-
 Grade.displayName = 'Grade';
 
 Grade.defaultProps = {
-  maxGrade: 10,
+  maxGrade: 5,
+  iconName: 'star',
   value: 0
 }
 
@@ -69,4 +87,27 @@ Grade.propTypes = {
   onClick: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired
 }
-export default Question;
+
+function Button({children, type, onClick, isColored}){
+  return (
+    <button onClick={onClick} className={`mdl-button mdl-button--${type} ${isColored ? 'mdl-button--colored' : ''}`}>
+      {children}
+    </button>
+  )
+}
+Button.displayName = 'Button';
+Button.defaultProps = {
+  isColored: false,
+  type: 'fab'
+};
+Button.propTypes = {
+  onClick: PropTypes.func.isRequired,
+  iconName: PropTypes.string,
+  type: PropTypes.string,
+  isColored: PropTypes.bool
+}
+const StateConnectedQuestion = connectToReduxStore(
+  (data) => ({storeData: data, isQuestionVisible: data.isQuestionVisible})
+)(Question);
+
+export default StateConnectedQuestion;
