@@ -80,5 +80,8 @@
     "webpack": "^1.12.13",
     "webpack-dev-server": "^1.14.1",
     "webpack-focus": "^0.10.1"
+  },
+  "dependencies": {
+    "firebase": "^2.4.1"
   }
 }
