@@ -6,6 +6,7 @@ import {connect as connectToReduxStore } from 'react-redux';
 import Code from './code'
 import Average from './push-question/average';
 import Grade from './push-question/grade'
+import Routes from './routes';
 
 class Question extends Component {
   constructor(props){
@@ -27,7 +28,7 @@ class Question extends Component {
     this.props.dispatch(this.props.sendGrade(this.state.grade));
   }
   render(){
-    const {isQuestionVisible} = this.props;
+    const {isQuestionVisible, isRoutesVisible} = this.props;
     const codeProps = {state: this.state, props: this.props}
     return  (
       <div>
@@ -37,16 +38,25 @@ class Question extends Component {
           :
             <Average lastVote={this.props.storeData.pushQuestion.lastDate || new Date().toISOString()} grades={this.props.storeData.pushQuestion.projectAnswers || []}/>
         }
+        {
+          isRoutesVisible &&
+            <Routes />
+        }
         <Code {...codeProps} />
       </div>
     )
   }
 }
-
+Question.defaultProps = {
+  isQuestionVisible: false,
+  isRoutesVisible: true
+};
 
 Question.propTypes = {
   grade: PropTypes.number,
-  sendGrade: PropTypes.func.isRequired
+  sendGrade: PropTypes.func.isRequired,
+  isQuestionVisible: PropTypes.bool.isRequired,
+isRoutesVisible: PropTypes.bool.isRequired
 }
 
 
