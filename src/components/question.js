@@ -9,7 +9,7 @@ import Grade from './push-question/grade'
 import Routes from './routes';
 import FluxStores from './flux-stores';
 
-class Question extends Component {
+class FocusDevTools extends Component {
   constructor(props){
     super(props);
     this.state = {grade: this.props.grade};
@@ -52,23 +52,24 @@ class Question extends Component {
     )
   }
 }
-Question.defaultProps = {
+FocusDevTools.defaultProps = {
   isQuestionVisible: false,
   isRoutesVisible: true,
   isFluxStoresVisible: true
 };
 
-Question.propTypes = {
+FocusDevTools.propTypes = {
   grade: PropTypes.number,
   sendGrade: PropTypes.func.isRequired,
   isQuestionVisible: PropTypes.bool.isRequired,
 isRoutesVisible: PropTypes.bool.isRequired,
 isFluxStoresVisible: PropTypes.bool.isRequired
-}
+};
+FocusDevTools.displayName = 'FocusDevTools';
 
 
-const StateConnectedQuestion = connectToReduxStore(
+const StateConnectedFocusDevTools = connectToReduxStore(
   (data) => ({storeData: data, isQuestionVisible: data.pushQuestion.isQuestionVisible})
-)(Question);
+)(FocusDevTools);
 
-export default StateConnectedQuestion;
+export default StateConnectedFocusDevTools;
