@@ -10,7 +10,7 @@ Its purpose is also to allow us to collect some __satisfaction__ indicators.
 Here is a short video demo of this tool
 
 [A video of the component in action](https://youtu.be/XuaWkIbWR-A)
-
+<iframe width="560" height="315" src="https://www.youtube.com/embed/XuaWkIbWR-A" frameborder="0" allowfullscreen></iframe>
 
 ## How to use it
 
