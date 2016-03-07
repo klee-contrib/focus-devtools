@@ -26,7 +26,7 @@ RoutesDX.displayName = 'RoutesDX';
 RoutesDX.defaultProps = {
   process: _defaultProcessRoute,
   className: 'mdl-list',
-  title: 'Your routes'
+  title: 'Routes'
 }
 RoutesDX.propTypes = {
   data: PropTypes.array.isRequired,

@@ -32,7 +32,7 @@ FluxStoresList.propTypes = {
   stores: PropTypes.object.isRequired
 };
 FluxStoresList.defaultProps ={
-  title: 'Your stores'
+  title: 'Stores'
 }
 
 export default FluxStoresList;

@@ -39,7 +39,7 @@ class FocusDevTools extends Component {
           isQuestionVisible ?
             <Grade contentWidth={contentWidth} value={this.state.grade} maxGrade={5} onChange={value => this.setGrade(value)} onClick={value => this.setGrade(value)} onSend={() => this.onSend()} />
           :
-            <Average lastVote={this.props.storeData.pushQuestion.lastDate || new Date().toISOString()} grades={this.props.storeData.pushQuestion.projectAnswers || []}/>
+            null/*<Average lastVote={this.props.storeData.pushQuestion.lastDate || new Date().toISOString()} grades={this.props.storeData.pushQuestion.projectAnswers || []}/>*/
         }
         {
           !isQuestionVisible  && isFluxStoresVisible &&
