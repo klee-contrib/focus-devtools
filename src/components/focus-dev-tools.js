@@ -8,7 +8,7 @@ import Average from './push-question/average';
 import Grade from './push-question/grade'
 import Routes from './routes';
 import FluxStores from './flux-stores';
-
+import {setRouteMode, setFluxStoreMode} from '../actions/dev-tools-settings-actions';
 const DevTool = ({grade, onSetGrade, onSendGrade, styleProps, mode, stores, routes}) => {
   switch(mode) {
     case 'question':
@@ -52,14 +52,20 @@ class FocusDevTools extends Component {
   onSend(){
     this.props.dispatch(this.props.sendGrade(this.state.grade));
   }
+
   render(){
-    const {isQuestionVisible, isRoutesVisible, isFluxStoresVisible, contentWidth, titlePadding, isDebugDevTools, isSwitchMode, stores, routes} = this.props;
+    const {dispatch,isQuestionVisible, isRoutesVisible, isFluxStoresVisible, contentWidth, titlePadding, isDebugDevTools, isSwitchMode, stores, routes} = this.props;
     const codeProps = {state: this.state, props: this.props};
     const styleProps = {contentWidth,titlePadding};
     const mode = isQuestionVisible ? 'question' : (isRoutesVisible ? 'routes' : (isFluxStoresVisible ? 'flux' : null));
     return  (
       <div style={{paddingTop: this.props.paddingTop}}>
-        <SwitchActivator title={'Focus Dev tools'} mode={mode}/>
+        <SwitchActivator
+          title={'Focus Dev tools'}
+          mode={mode}
+          onFluxStoreClick={() => dispatch(setFluxStoreMode())}
+          onRoutesClick={() => dispatch(setRouteMode())}
+        />
         <DevTool
           grade={this.state.grade}
           mode={mode}
@@ -97,7 +103,7 @@ FocusDevTools.displayName = 'FocusDevTools';
 
 
 const StateConnectedFocusDevTools = connectToReduxStore(
-  (data) => ({storeData: data, isQuestionVisible: data.pushQuestion.isQuestionVisible})
+  (data) => ({storeData: data, isQuestionVisible: data.pushQuestion.isQuestionVisible, isRoutesVisible: data.settings.isRoutesVisible, isFluxStoresVisible: data.settings.isFluxStoresVisible})
 )(FocusDevTools);
 
 export default StateConnectedFocusDevTools;

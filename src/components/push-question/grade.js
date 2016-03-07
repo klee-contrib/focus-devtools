@@ -4,7 +4,7 @@ import Icon from '../icon';
 
 const Grade = ({value, maxGrade, onChange, onClick, onSend, iconName, contentWidth, titlePadding, title}) => {
   return (
-    <div data-focus='question' style={{display: 'flex', justifyContent: 'center', alignItems: 'center', width: contentWidth}}>
+    <div data-focus='question' style={{display: 'flex', justifyContent: 'center', alignItems: 'center', width: contentWidth, marginTop: '40px'}}>
       <div style={{display: 'flex', width: '80%'}}>
         {
           Array.from(Array(maxGrade).keys()).map(

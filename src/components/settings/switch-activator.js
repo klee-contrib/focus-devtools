@@ -14,18 +14,18 @@ const switchStyle = {
   justifyContent: 'space-between'
 };
 
-const SwitchActivator = ({title,mode, iconName}) => {
+const SwitchActivator = ({title,mode, iconName, onFluxStoreClick, onRoutesClick}) => {
+  const text = mode === 'question' ? 'Which grade for focus ?': mode;
   return (
     <div style={switchStyle}>
-      <h4 style={{margin: 0}}>{title}</h4>
-      <h4 style={{margin: 0, color: COLOR, background: 'white', padding: '0 10px 0 10px'}}>{mode}</h4>
+      <h4 style={{margin: 10}}>{title}</h4>
+      <h4 style={{margin: 10, color: COLOR, background: 'white', padding: '0 10px 0 10px'}}>{text}</h4>
       <button id='dx-switch-activator' className="mdl-button mdl-button--icon">
         <Icon>{iconName}</Icon>
       </button>
-      <Switcher targetId={'dx-switch-activator'}  onFluxStoreClick={() => console.log('flux store mode')} onRoutesClick={() => console.log('routes mode')} />
+      <Switcher targetId={'dx-switch-activator'}  onFluxStoreClick={onFluxStoreClick} onRoutesClick={onRoutesClick} />
     </div>
   );
-  return <Button onClick={()=> onClick()}><Icon>{'developer_board'}</Icon></Button>;
 }
 
 SwitchActivator.displayName = 'SwitchActivator';
