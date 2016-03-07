@@ -7,6 +7,7 @@ import Code from './code'
 import Average from './push-question/average';
 import Grade from './push-question/grade'
 import Routes from './routes';
+import FluxStores from './flux-stores';
 
 class Question extends Component {
   constructor(props){
@@ -28,7 +29,7 @@ class Question extends Component {
     this.props.dispatch(this.props.sendGrade(this.state.grade));
   }
   render(){
-    const {isQuestionVisible, isRoutesVisible} = this.props;
+    const {isQuestionVisible, isRoutesVisible, isFluxStoresVisible} = this.props;
     const codeProps = {state: this.state, props: this.props}
     return  (
       <div>
@@ -37,6 +38,10 @@ class Question extends Component {
             <Grade value={this.state.grade} maxGrade={5} onChange={value => this.setGrade(value)} onClick={value => this.setGrade(value)} onSend={() => this.onSend()} />
           :
             <Average lastVote={this.props.storeData.pushQuestion.lastDate || new Date().toISOString()} grades={this.props.storeData.pushQuestion.projectAnswers || []}/>
+        }
+        {
+          isFluxStoresVisible &&
+          <FluxStores />
         }
         {
           isRoutesVisible &&
@@ -49,14 +54,16 @@ class Question extends Component {
 }
 Question.defaultProps = {
   isQuestionVisible: false,
-  isRoutesVisible: true
+  isRoutesVisible: true,
+  isFluxStoresVisible: true
 };
 
 Question.propTypes = {
   grade: PropTypes.number,
   sendGrade: PropTypes.func.isRequired,
   isQuestionVisible: PropTypes.bool.isRequired,
-isRoutesVisible: PropTypes.bool.isRequired
+isRoutesVisible: PropTypes.bool.isRequired,
+isFluxStoresVisible: PropTypes.bool.isRequired
 }
 
 
