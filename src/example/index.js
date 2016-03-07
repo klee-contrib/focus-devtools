@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                     toggleVisibilityKey='ctrl-m'
                     routes={routes}
                     stores={strs}
-                    isDebugDevTools={true}
+                    isDebugDevTools={false}
                   />
               </main>
             </div>,

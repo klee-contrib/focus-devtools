@@ -34,6 +34,7 @@ class FocusDevTools extends Component {
     return  (
       <div>
         <h2> Focus Dev tools</h2>
+        {isQuestionVisible && <h3 style={{textAlign: 'center'}}>Which note for focus today ?</h3>}
         {
           isQuestionVisible ?
             <Grade contentWidth={contentWidth} value={this.state.grade} maxGrade={5} onChange={value => this.setGrade(value)} onClick={value => this.setGrade(value)} onSend={() => this.onSend()} />
@@ -41,11 +42,11 @@ class FocusDevTools extends Component {
             <Average lastVote={this.props.storeData.pushQuestion.lastDate || new Date().toISOString()} grades={this.props.storeData.pushQuestion.projectAnswers || []}/>
         }
         {
-          isFluxStoresVisible &&
+          !isQuestionVisible  && isFluxStoresVisible &&
           <FluxStores contentWidth={contentWidth} titlePadding={titlePadding} stores={this.props.stores}/>
         }
         {
-          isRoutesVisible &&
+          !isQuestionVisible && isRoutesVisible &&
             <Routes contentWidth={contentWidth} titlePadding={titlePadding} data={this.props.routes}/>
         }
         {isDebugDevTools && <Code {...codeProps} /> }
