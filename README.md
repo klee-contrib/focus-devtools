@@ -9,7 +9,7 @@ Its purpose is also to allow us to collect some __satisfaction__ indicators.
 
 Here is a short video demo of this tool
 
-![video](https://youtu.be/XuaWkIbWR-A)
+[A video of the component in action](https://youtu.be/XuaWkIbWR-A)
 
 
 ## How to use it
