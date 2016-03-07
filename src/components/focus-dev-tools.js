@@ -1,13 +1,37 @@
 // react and redux utils
 import React, {Component, PropTypes} from 'react';
 import {connect as connectToReduxStore } from 'react-redux';
-
+import SwitchActivator from './settings/switch-activator';
 // get internal components
 import Code from './code'
 import Average from './push-question/average';
 import Grade from './push-question/grade'
 import Routes from './routes';
 import FluxStores from './flux-stores';
+
+const DevTool = ({grade, onSetGrade, onSendGrade, styleProps, mode, stores, routes}) => {
+  switch(mode) {
+    case 'question':
+      return <Grade value={grade} maxGrade={5} onChange={onSetGrade} onClick={onSetGrade} onSend={onSendGrade} {...styleProps}/>;
+    case 'flux':
+      return <FluxStores stores={stores} {...styleProps}/>;
+    case 'routes':
+      return <Routes data={routes} {...styleProps}/>;
+    default:
+      return <div>Empty</div>;
+  };
+};
+DevTool.displayName = 'DevTool';
+DevTool.PropTypes = {
+  grade: PropTypes.number,
+  onSetGrade: PropTypes.func.isRequired,
+  onSendGrade: PropTypes.func.isRequired,
+  styleProps: PropTypes.object,
+  mode: PropTypes.string.isRequired,
+  stores: PropTypes.object.isRequired,
+  roures: PropTypes.array.isRequired
+}
+
 
 class FocusDevTools extends Component {
   constructor(props){
@@ -29,27 +53,27 @@ class FocusDevTools extends Component {
     this.props.dispatch(this.props.sendGrade(this.state.grade));
   }
   render(){
-    const {isQuestionVisible, isRoutesVisible, isFluxStoresVisible, contentWidth, titlePadding, isDebugDevTools} = this.props;
-    const codeProps = {state: this.state, props: this.props}
+    const {isQuestionVisible, isRoutesVisible, isFluxStoresVisible, contentWidth, titlePadding, isDebugDevTools, isSwitchMode, stores, routes} = this.props;
+    const codeProps = {state: this.state, props: this.props};
+    const styleProps = {contentWidth,titlePadding};
+    const mode = isQuestionVisible ? 'question' : (isRoutesVisible ? 'routes' : (isFluxStoresVisible ? 'flux' : null));
     return  (
-      <div>
-        <h2> Focus Dev tools</h2>
-        {isQuestionVisible && <h3 style={{textAlign: 'center'}}>Which note for focus today ?</h3>}
+      <div style={{paddingTop: this.props.paddingTop}}>
+        <SwitchActivator title={'Focus Dev tools'} mode={mode}/>
+        <DevTool
+          grade={this.state.grade}
+          mode={mode}
+          onSendGrade={()=> this.onSend()}
+          onSetGrade={value =>this.setGrade(value)}
+          routes={routes}
+          stores={stores}
+          styleProps={styleProps}
+        />
+        {isDebugDevTools && <Code {...codeProps} /> }
         {
-          isQuestionVisible ?
-            <Grade contentWidth={contentWidth} value={this.state.grade} maxGrade={5} onChange={value => this.setGrade(value)} onClick={value => this.setGrade(value)} onSend={() => this.onSend()} />
-          :
+          isQuestionVisible &&
             null/*<Average lastVote={this.props.storeData.pushQuestion.lastDate || new Date().toISOString()} grades={this.props.storeData.pushQuestion.projectAnswers || []}/>*/
         }
-        {
-          !isQuestionVisible  && isFluxStoresVisible &&
-          <FluxStores contentWidth={contentWidth} titlePadding={titlePadding} stores={this.props.stores}/>
-        }
-        {
-          !isQuestionVisible && isRoutesVisible &&
-            <Routes contentWidth={contentWidth} titlePadding={titlePadding} data={this.props.routes}/>
-        }
-        {isDebugDevTools && <Code {...codeProps} /> }
       </div>
     )
   }
@@ -57,7 +81,8 @@ class FocusDevTools extends Component {
 FocusDevTools.defaultProps = {
   isQuestionVisible: false,
   isRoutesVisible: true,
-  isFluxStoresVisible: true
+  isFluxStoresVisible: false,
+  isSwitchMode: true
 };
 
 FocusDevTools.propTypes = {
@@ -65,7 +90,8 @@ FocusDevTools.propTypes = {
   sendGrade: PropTypes.func.isRequired,
   isQuestionVisible: PropTypes.bool.isRequired,
   isRoutesVisible: PropTypes.bool.isRequired,
-  isFluxStoresVisible: PropTypes.bool.isRequired
+  isFluxStoresVisible: PropTypes.bool.isRequired,
+  isSwitchMode: PropTypes.bool.isRequired
 };
 FocusDevTools.displayName = 'FocusDevTools';
 

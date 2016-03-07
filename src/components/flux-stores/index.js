@@ -10,7 +10,7 @@ const FluxStoresList = ({stores, title, contentWidth, titlePadding}) => {
   }, []) : [];
   return (
     <div style={{width: contentWidth}}>
-      <h3 style={{padding: titlePadding}}>{title}</h3>
+      {/*<h3 style={{padding: titlePadding}}>{title}</h3>*/}
       <ul className='mdl-list'>
         {
           storeList.length > 0

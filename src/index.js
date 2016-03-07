@@ -31,6 +31,7 @@ export const FocusDevTools = (props) => {
           initQuestion={() => initQuestion()}
           sendGrade={grade => saveAnswer(props.project, {date: new Date().getTime(), user: props.user, grade: grade})}
           isDebugDevTools={props.isDebugDevTools}
+          paddingTop={props.paddingTop || props.isPanel ? '60px': 0}
         />
       </StoreProvider>
     </DevPanel>
@@ -38,4 +39,5 @@ export const FocusDevTools = (props) => {
 }
 
 FocusDevTools.displayName = 'FocusDevTools';
+
 export default FocusDevTools;

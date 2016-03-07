@@ -8,7 +8,7 @@ const _defaultProcessRoute = r =>  ({name: r.route.toString().split('(')[0].spli
 const RoutesDX = ({className, data, process, title, contentWidth, titlePadding}) => {
   return (
     <div data-focus='routes-dx' style={{width: contentWidth}}>
-      <h3 style={{padding: titlePadding}}>{title}</h3>
+      {/*<h3 style={{padding: titlePadding}}>{title}</h3>*/}
       <ul className={className} data-focus='routes' >
         { data ?
           data.
