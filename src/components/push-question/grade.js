@@ -2,10 +2,10 @@ import React, {PropTypes} from 'react';
 import Button from '../button';
 import Icon from '../icon';
 
-const Grade = ({value, maxGrade, onChange, onClick, onSend, iconName}) => {
+const Grade = ({value, maxGrade, onChange, onClick, onSend, iconName, contentWidth, titlePadding, title}) => {
   return (
-    <div data-focus='question' style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-      <div style={{display: 'flex', width: '40%', maxWidth: '500px'}}>
+    <div data-focus='question' style={{display: 'flex', justifyContent: 'center', alignItems: 'center', width: contentWidth}}>
+      <div style={{display: 'flex', width: '80%'}}>
         {
           Array.from(Array(maxGrade).keys()).map(
             gd => <Button key={gd} onClick={() => onClick(gd)}><Icon>{gd <= value ? iconName : `${iconName}_border`}</Icon></Button>
@@ -21,7 +21,8 @@ Grade.displayName = 'Grade';
 Grade.defaultProps = {
   maxGrade: 5,
   iconName: 'star',
-  value: 0
+  value: 0,
+  title: 'Notez Focus'
 }
 
 Grade.propTypes = {

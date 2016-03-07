@@ -5,10 +5,10 @@ import JSONTree from 'react-json-tree';
 
 const _defaultProcessRoute = r =>  ({name: r.route.toString().split('(')[0].split('/^')[1], callback: r.callback});
 
-const RoutesDX = ({className, data, process, title, contentWidth}) => {
+const RoutesDX = ({className, data, process, title, contentWidth, titlePadding}) => {
   return (
     <div data-focus='routes-dx' style={{width: contentWidth}}>
-      <h3>{title}</h3>
+      <h3 style={{padding: titlePadding}}>{title}</h3>
       <ul className={className} data-focus='routes' >
         { data ?
           data.

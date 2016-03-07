@@ -29,25 +29,26 @@ class FocusDevTools extends Component {
     this.props.dispatch(this.props.sendGrade(this.state.grade));
   }
   render(){
-    const {isQuestionVisible, isRoutesVisible, isFluxStoresVisible, contentWidth} = this.props;
+    const {isQuestionVisible, isRoutesVisible, isFluxStoresVisible, contentWidth, titlePadding, isDebugDevTools} = this.props;
     const codeProps = {state: this.state, props: this.props}
     return  (
       <div>
+        <h2> Focus Dev tools</h2>
         {
           isQuestionVisible ?
-            <Grade value={this.state.grade} maxGrade={5} onChange={value => this.setGrade(value)} onClick={value => this.setGrade(value)} onSend={() => this.onSend()} />
+            <Grade contentWidth={contentWidth} value={this.state.grade} maxGrade={5} onChange={value => this.setGrade(value)} onClick={value => this.setGrade(value)} onSend={() => this.onSend()} />
           :
             <Average lastVote={this.props.storeData.pushQuestion.lastDate || new Date().toISOString()} grades={this.props.storeData.pushQuestion.projectAnswers || []}/>
         }
         {
           isFluxStoresVisible &&
-          <FluxStores contentWidth={contentWidth} stores={this.props.stores}/>
+          <FluxStores contentWidth={contentWidth} titlePadding={titlePadding} stores={this.props.stores}/>
         }
         {
           isRoutesVisible &&
-            <Routes contentWidth={contentWidth} data={this.props.routes}/>
+            <Routes contentWidth={contentWidth} titlePadding={titlePadding} data={this.props.routes}/>
         }
-        <Code {...codeProps} />
+        {isDebugDevTools && <Code {...codeProps} /> }
       </div>
     )
   }

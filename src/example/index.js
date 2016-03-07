@@ -10,7 +10,16 @@ import dispatcher from './dispatcher-mock';
 import stores from './store-mock';
 import logger from '../logger/dispatch-logger';
 const routeLogger = d => console.log('route' , d)
-
+const strs =  {
+    'person': {
+      name: 'person',
+      getValue: () => ({name: 'Pierre', age: 28})
+    },
+    'search': {
+      name: 'search',
+      getValue: () => ({name: 'Don diego', test: [{name: 1}, {name: 1},{name: 1},{name: 3}]})
+    }
+  };
 const routes = [{
   route: /^help(?:\?([\s\S]*))?$/,
   callback: routeLogger
@@ -60,7 +69,15 @@ document.addEventListener('DOMContentLoaded', (event) => {
             </nav>
             </div>
               <main className='mdl-layout__content'>
-                  <FocusDevTools isPanel={true} user='pierr' project='focus_devtools' toggleVisibilityKey='ctrl-m'/>
+                  <FocusDevTools
+                    isPanel={true}
+                    user='pierr'
+                    project='focus_devtools'
+                    toggleVisibilityKey='ctrl-m'
+                    routes={routes}
+                    stores={strs}
+                    isDebugDevTools={true}
+                  />
               </main>
             </div>,
     rootElement);

@@ -25,10 +25,12 @@ export const FocusDevTools = (props) => {
         <DevTools
           stores={props.stores}
           routes={props.routes}
-          contentWidth={props.isPanel ? '100%' : '350px'}
+          titlePadding={'20px'}
+          contentWidth={props.isPanel ? '100%' : '400px'}
           toggleVisibilityKey={props.toggleVisibilityKey}
           initQuestion={() => initQuestion()}
           sendGrade={grade => saveAnswer(props.project, {date: new Date().getTime(), user: props.user, grade: grade})}
+          isDebugDevTools={props.isDebugDevTools}
         />
       </StoreProvider>
     </DevPanel>
