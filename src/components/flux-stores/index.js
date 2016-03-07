@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
 import FluxStore from './flux-store';
 
-const FluxStoresList = ({stores, title}) => {
+const FluxStoresList = ({stores, title, contentWidth}) => {
   const storeList = Object.keys(stores).reduce((res, current) => {
     const name = stores[current].name || stores[current].constructor.name;
     const getValue =  stores[current].getValue
@@ -9,7 +9,7 @@ const FluxStoresList = ({stores, title}) => {
      return res;
   }, []);
   return (
-    <div style={{width: '300px'}}>
+    <div style={{width: contentWidth}}>
       <h3>{title}</h3>
       <ul className='mdl-list'>
         {storeList.map(store => <FluxStore key={store.name} {...store} />)}

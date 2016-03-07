@@ -5,40 +5,25 @@ import JSONTree from 'react-json-tree';
 
 const _defaultProcessRoute = r =>  ({name: r.route.toString().split('(')[0].split('/^')[1], callback: r.callback});
 
-const RoutesDX = ({className, data, process, title}) => {
+const RoutesDX = ({className, data, process, title, contentWidth}) => {
   return (
-    <div data-focus='routes-dx' style={{width: '300px'}}>
+    <div data-focus='routes-dx' style={{width: contentWidth}}>
       <h3>{title}</h3>
       <ul className={className} data-focus='routes' >
-        {
+        { data ?
           data.
             map(process).
             map(({name, callback: onRouteClick}) => <RouteDX key={name} name={name} onClick={onRouteClick} />)
+          :
+          <li className='mdl-list__item'>No routes</li>
         }
       </ul>
     </div>
   );
 };
 
-
-
 RoutesDX.displayName = 'RoutesDX';
-
-const routeLogger = d => console.log('route' , d)
-
 RoutesDX.defaultProps = {
-  data: [{
-    route: /^help(?:\?([\s\S]*))?$/,
-    callback: routeLogger
-  },
-  {
-    route: /^holp(?:\?([\s\S]*))?$/,
-    callback: routeLogger
-  },
-  {
-    route: /^azjbnfhzbfhebhf(?:\?([\s\S]*))?$/,
-    callback: routeLogger
-  }],
   process: _defaultProcessRoute,
   className: 'mdl-list',
   title: 'La liste des routes'

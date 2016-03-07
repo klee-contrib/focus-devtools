@@ -1,19 +1,30 @@
 import 'babel-polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import MyComponent from '../';
 import 'material-design-icons-iconfont/dist/material-design-icons.css';
 import 'material-design-lite/material.css';
 import 'material-design-lite/material.min';
+import FocusDevTools from '../';
 import {init, populate} from './firebase';
-import {saveAnswer, initQuestion} from '../actions/push-question-actions';
-import logger from '../logger/dispatch-logger';
 import dispatcher from './dispatcher-mock';
 import stores from './store-mock';
-import store from '../store';
-import Question from '../components/question';
-import DevPanel from '../components/dev-panel';
-import { Provider as StoreProvider} from 'react-redux';
+import logger from '../logger/dispatch-logger';
+const routeLogger = d => console.log('route' , d)
+
+const routes = [{
+  route: /^help(?:\?([\s\S]*))?$/,
+  callback: routeLogger
+},
+{
+  route: /^holp(?:\?([\s\S]*))?$/,
+  callback: routeLogger
+},
+{
+  route: /^azjbnfhzbfhebhf(?:\?([\s\S]*))?$/,
+  callback: routeLogger
+}];
+
+
 
 init(() => populate(false));
 logger(dispatcher, () => stores);
@@ -48,15 +59,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
               <a className='mdl-navigation__link' href=''>Link</a>
             </nav>
             </div>
-            <StoreProvider store={store}>
               <main className='mdl-layout__content'>
-                  <MyComponent />
-                  <DevPanel project='focus_devtools' user='pierr'>
-                    <h2>{'Comment ça se passe avec Focus sur votre projet ?'}</h2>
-                    <Question initQuestion={() => initQuestion()} sendGrade={grade => saveAnswer('focus_devtools', {date: new Date().getTime(), user: 'pierr', grade: grade})}/>
-                  </DevPanel>
+                  <FocusDevTools isPanel={true} user='pierr' project='focus_devtools' toggleVisibilityKey='ctrl-m'/>
               </main>
-            </StoreProvider>
             </div>,
     rootElement);
 });

@@ -29,7 +29,7 @@ class FocusDevTools extends Component {
     this.props.dispatch(this.props.sendGrade(this.state.grade));
   }
   render(){
-    const {isQuestionVisible, isRoutesVisible, isFluxStoresVisible} = this.props;
+    const {isQuestionVisible, isRoutesVisible, isFluxStoresVisible, contentWidth} = this.props;
     const codeProps = {state: this.state, props: this.props}
     return  (
       <div>
@@ -41,11 +41,11 @@ class FocusDevTools extends Component {
         }
         {
           isFluxStoresVisible &&
-          <FluxStores />
+          <FluxStores contentWidth={contentWidth} stores={this.props.stores}/>
         }
         {
           isRoutesVisible &&
-            <Routes />
+            <Routes contentWidth={contentWidth} data={this.props.routes}/>
         }
         <Code {...codeProps} />
       </div>
@@ -62,8 +62,8 @@ FocusDevTools.propTypes = {
   grade: PropTypes.number,
   sendGrade: PropTypes.func.isRequired,
   isQuestionVisible: PropTypes.bool.isRequired,
-isRoutesVisible: PropTypes.bool.isRequired,
-isFluxStoresVisible: PropTypes.bool.isRequired
+  isRoutesVisible: PropTypes.bool.isRequired,
+  isFluxStoresVisible: PropTypes.bool.isRequired
 };
 FocusDevTools.displayName = 'FocusDevTools';
 
