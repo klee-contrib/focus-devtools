@@ -2,7 +2,7 @@ import React, {PropTypes} from 'react';
 import Icon from '../icon';
 const RouteDX = ({name, onClick, className, iconName}) => {
   return (
-    <li className={className} >
+    <li className={className} onClick={() => onClick(name)}>
       <span className='mdl-list__item-primary-content'>
         {name}
       </span>

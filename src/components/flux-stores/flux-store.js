@@ -17,8 +17,8 @@ class FluxStore extends Component {
     const {name, getValue} = this.props;
     const iconName = isValueVisible  ? 'keyboard_arrow_up' : 'keyboard_arrow_down';
     return (
-      <div onClick={() => this.toggleShowStoreValue()}>
-      <li className='mdl-list__item' >
+      <div>
+      <li className='mdl-list__item' onClick={() => this.toggleShowStoreValue()}>
         <span className='mdl-list__item-primary-content'>
           {name}
         </span>
