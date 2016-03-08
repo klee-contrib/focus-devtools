@@ -1,3 +1,11 @@
+/actions/*
+/components/*
+/dist/*
+/logger/*
+/reducers/*
+/store/*
+/index.js
+
 # Logs
 logs
 *.log

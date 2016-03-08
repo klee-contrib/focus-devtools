@@ -5,7 +5,7 @@ import store from './store';
 import FocusDevToolsContent from './components/focus-dev-tools';
 import DevPanel from './components/dev-panel';
 import  FocusDevDock from './components/focus-dev-dock';
-
+import logger from './logger/dispatch-logger';
 const FocusDevToolsPanel  = (props) => {
   const {toggleVisibilityKey, ...otherProps} = props;
   return (
@@ -39,5 +39,7 @@ export const FocusDevTools = (props) => {
 }
 
 FocusDevTools.displayName = 'FocusDevTools';
+FocusDevTools.VERSION = '0.1.O';
+FocusDevTools.logger = logger;
 
 export default FocusDevTools;
