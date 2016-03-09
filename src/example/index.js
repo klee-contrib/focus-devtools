@@ -5,7 +5,7 @@ import 'material-design-icons-iconfont/dist/material-design-icons.css';
 import 'material-design-lite/material.css';
 import 'material-design-lite/material.min';
 import FocusDevTools from '../';
-import {init, populate} from './firebase';
+import {init, populate} from '../service/firebase';
 import dispatcher from './dispatcher-mock';
 import stores from './store-mock';
 import logger from '../logger/dispatch-logger';
@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                     project='focus_devtools'
                     toggleVisibilityKey='ctrl-m'
                     routes={routes}
-                    stores={strs}
+                    getStores={() => strs}
                     isDebugDevTools={false}
                   />
               </main>

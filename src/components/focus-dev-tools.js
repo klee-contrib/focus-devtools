@@ -9,12 +9,20 @@ import Grade from './push-question/grade'
 import Routes from './routes';
 import FluxStores from './flux-stores';
 import {setRouteMode, setFluxStoreMode} from '../actions/dev-tools-settings-actions';
-const DevTool = ({grade, onSetGrade, onSendGrade, styleProps, mode, stores, routes}) => {
+
+const _processStores = stores => stores.reduce((res, current) => {
+            const name = current.name || current.constructor.name;
+            res[name] = {name, getValue: () => current.getValue()};
+            return res;
+}, {});
+
+const DevTool = ({grade, onSetGrade, onSendGrade, styleProps, mode, getStores, routes, processStores}) => {
   switch(mode) {
     case 'question':
       return <Grade value={grade} maxGrade={5} onChange={onSetGrade} onClick={onSetGrade} onSend={onSendGrade} {...styleProps}/>;
     case 'flux':
-      return <FluxStores stores={stores} {...styleProps}/>;
+
+      return <FluxStores stores={processStores(getStores())} {...styleProps}/>;
     case 'routes':
       return <Routes data={routes} {...styleProps}/>;
     default:
@@ -28,8 +36,12 @@ DevTool.PropTypes = {
   onSendGrade: PropTypes.func.isRequired,
   styleProps: PropTypes.object,
   mode: PropTypes.string.isRequired,
-  stores: PropTypes.object.isRequired,
-  roures: PropTypes.array.isRequired
+  getStores: PropTypes.func.isRequired,
+  routes: PropTypes.array.isRequired,
+  processStores: PropTypes.func.isRequired
+}
+DevTool.defaultProps = {
+  processStores: _processStores
 }
 
 
@@ -54,7 +66,7 @@ class FocusDevTools extends Component {
   }
 
   render(){
-    const {dispatch,isQuestionVisible, isRoutesVisible, isFluxStoresVisible, contentWidth, titlePadding, isDebugDevTools, isSwitchMode, stores, routes} = this.props;
+    const {dispatch,isQuestionVisible, isRoutesVisible, isFluxStoresVisible, contentWidth, titlePadding, isDebugDevTools, isSwitchMode, getStores, routes} = this.props;
     const codeProps = {state: this.state, props: this.props};
     const styleProps = {contentWidth,titlePadding};
     const mode = isQuestionVisible ? 'question' : (isRoutesVisible ? 'routes' : (isFluxStoresVisible ? 'flux' : null));
@@ -72,7 +84,7 @@ class FocusDevTools extends Component {
           onSendGrade={()=> this.onSend()}
           onSetGrade={value =>this.setGrade(value)}
           routes={routes}
-          stores={stores}
+          getStores={getStores}
           styleProps={styleProps}
         />
         {isDebugDevTools && <Code {...codeProps} /> }
@@ -97,7 +109,9 @@ FocusDevTools.propTypes = {
   isQuestionVisible: PropTypes.bool.isRequired,
   isRoutesVisible: PropTypes.bool.isRequired,
   isFluxStoresVisible: PropTypes.bool.isRequired,
-  isSwitchMode: PropTypes.bool.isRequired
+  isSwitchMode: PropTypes.bool.isRequired,
+  routes: PropTypes.array.isRequired,
+  getStores: PropTypes.func.isRequired
 };
 FocusDevTools.displayName = 'FocusDevTools';
 
