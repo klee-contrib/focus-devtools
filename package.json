@@ -1,8 +1,8 @@
 {
   "name": "focus-devtools",
-  "version": "0.1.0",
+  "version": "0.2.1",
   "description": "Form, data behaviours",
-  "main": "src/index.js",
+  "main": "index.js",
   "scripts": {
     "test": "BABEL_ENV=test mocha src/**/__tests__/**/*.js",
     "test:watch": "BABEL_ENV=test mocha src/**/__tests__/**/*.js --watch",
@@ -11,7 +11,7 @@
     "bundle": "better-npm-run bundle ",
     "prepublish": "npm run build && npm run bundle"
   },
-  "files": ["dist", "lib", "src"],
+  "files": ["dist", "lib", "src", "index.js","actions","components", "logger", "reducers", "store", "service"],
   "betterScripts": {
     "dev-server": {
       "command": "node ./server.js",

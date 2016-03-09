@@ -1,4 +1,4 @@
-import {loadGrades as loadGradesSvc, loadProjects as loadProjectsSvc, saveAnswer as saveAnswerSvc} from '../example/firebase';
+import {loadGrades as loadGradesSvc, loadProjects as loadProjectsSvc, saveAnswer as saveAnswerSvc} from '../service/firebase';
 const LS_KEY = 'dx-question-last-answer';
 
 export const SHOW_DX_QUESTION =  'SHOW_DX_QUESTION';

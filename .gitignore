@@ -4,6 +4,7 @@
 /logger/*
 /reducers/*
 /store/*
+/service/*
 /index.js
 
 # Logs
