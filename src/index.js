@@ -7,6 +7,21 @@ import DevPanel from './components/dev-panel';
 import  FocusDevDock from './components/focus-dev-dock';
 import logger from './logger/dispatch-logger';
 
+let USER;
+try{
+  USER = __USER__
+}catch(e){
+  USER = 'NO_USER';
+}
+
+let PROJECT;
+try{
+  PROJECT = __PROJECT__
+}catch(e){
+  PROJECT = 'NO_PROJECT';
+}
+
+
 const FocusDevToolsPanel  = props => {
   const {toggleVisibilityKey, ...otherProps} = props;
   return (
@@ -32,7 +47,7 @@ const FocusDevTools = (props) => {
           initQuestion={() => initQuestion()}
           sendGrade={grade => saveAnswer(props.project, {date: new Date().getTime(), user: props.user, grade: grade})}
           isDebugDevTools={props.isDebugDevTools}
-          paddingTop={props.paddingTop || props.isPanel ? '60px': 0}
+          paddingTop={props.paddingTop !== undefined ? props.paddingTop : (props.isPanel ? '60px' : 0)}
         />
       </StoreProvider>
     </DevPanel>
@@ -53,7 +68,9 @@ FocusDevTools.propTypes = {
 FocusDevTools.defaultProps = {
   isPanel: true,
   toggleVisibilityKey: 'ctrl-m',
-  isDebugDevTools: false
+  isDebugDevTools: false,
+  user: USER,
+  project: PROJECT
 }
 FocusDevTools.displayName = 'FocusDevTools';
 FocusDevTools.VERSION = '0.1.O';

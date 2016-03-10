@@ -1,7 +1,7 @@
 {
   "name": "focus-devtools",
-  "version": "0.3.1",
-  "description": "Form, data behaviours",
+  "version": "0.3.2",
+  "description": "Focus devtools",
   "main": "index.js",
   "scripts": {
     "test": "BABEL_ENV=test mocha src/**/__tests__/**/*.js",
@@ -39,7 +39,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pierr/data-behaviours.git"
+    "url": "git+https://github.com/get-focus/focus-devtools.git"
   },
   "keywords": [
     "react",
@@ -50,9 +50,9 @@
   "author": "Pierre Besson <Pierre.besson7+npm@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/pierr/data-behaviours/issues"
+    "url": "https://github.com/get-focus/focus-devtools/issues"
   },
-  "homepage": "https://github.com/pierr/data-behaviours#readme",
+  "homepage": "https://github.com/get-focus/focus-devtools#readme",
   "devDependencies": {
     "autoprefixer-loader": "^3.2.0",
     "babel-core": "^6.4.5",
