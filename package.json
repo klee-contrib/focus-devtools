@@ -1,17 +1,28 @@
 {
   "name": "focus-devtools",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "Focus devtools",
   "main": "index.js",
   "scripts": {
     "test": "BABEL_ENV=test mocha src/**/__tests__/**/*.js",
     "test:watch": "BABEL_ENV=test mocha src/**/__tests__/**/*.js --watch",
     "start": "better-npm-run dev-server",
-    "build": "node scripts/babelify.js",
+    "build": "BABEL_ENV=production node scripts/babelify.js",
     "bundle": "better-npm-run bundle ",
     "prepublish": "npm run build && npm run bundle"
   },
-  "files": ["dist", "lib", "src", "index.js","actions","components", "logger", "reducers", "store", "service"],
+  "files": [
+    "dist",
+    "lib",
+    "src",
+    "index.js",
+    "actions",
+    "components",
+    "logger",
+    "reducers",
+    "store",
+    "service"
+  ],
   "betterScripts": {
     "dev-server": {
       "command": "node ./server.js",
