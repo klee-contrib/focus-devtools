@@ -47,7 +47,7 @@ const FocusDevTools = (props) => {
           initQuestion={() => initQuestion()}
           sendGrade={grade => saveAnswer(props.project, {date: new Date().getTime(), user: props.user, grade: grade})}
           isDebugDevTools={props.isDebugDevTools}
-          paddingTop={props.paddingTop !== undefined ? props.paddingTop : (props.isPanel ? '60px' : 0)}
+          paddingTop={props.paddingTop !== undefined ? props.paddingTop : 0}
         />
       </StoreProvider>
     </DevPanel>
