@@ -4,15 +4,23 @@ import Icon from '../icon';
 
 const Grade = ({value, maxGrade, onChange, onClick, onSend, iconName, contentWidth, titlePadding, title}) => {
   return (
-    <div data-focus='question' style={{display: 'flex', justifyContent: 'center', alignItems: 'center', width: contentWidth, marginTop: '40px'}}>
-      <div style={{display: 'flex', width: '80%'}}>
-        {
-          Array.from(Array(maxGrade).keys()).map(
-            gd => <Button key={gd} onClick={() => onClick(gd)}><Icon>{gd <= value ? iconName : `${iconName}_border`}</Icon></Button>
-          )
-        }
+    <div>
+      <div data-focus='question' style={{display: 'flex', justifyContent: 'center', alignItems: 'center', width: contentWidth, marginTop: '40px'}}>
+        <div style={{display: 'flex', width: '80%'}}>
+          {
+            Array.from(Array(maxGrade).keys()).map(
+              gd => <Button key={gd} onClick={() => onClick(gd)}><Icon>{gd <= value ? iconName : `${iconName}_border`}</Icon></Button>
+            )
+          }
+        </div>
+        <Button style={{width: '20%'}} isColored={true} type='raised' onClick={()=>{onSend()}}><Icon>send</Icon></Button>
       </div>
-      <Button style={{width: '20%'}} isColored={true} type='raised' onClick={()=>{onSend()}}><Icon>send</Icon></Button>
+      <div style={{width: '100%', alignItems: 'center', textAlign: 'center'}}>
+        <pre>{
+          `Click on a star to rate your experience with focus over 5...
+Thanks for your feedback!`
+        }</pre>
+      </div>
     </div>
   );
 }

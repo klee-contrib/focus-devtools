@@ -7,9 +7,10 @@ export const DX_QUESTION_NEW_RESPONSES = 'DX_QUESTION_NEW_RESPONSES';
 
 
 export function initQuestion(){
-  const ONE_DAY = 24 * 3600 * 1000;
-  const lastQuestionTime = +(localStorage.getItem(LS_KEY) || -ONE_DAY);
-  const isShowQuestion = new Date().getTime() - new Date(lastQuestionTime).getTime() >= ONE_DAY
+  const ONE_WEEK = 7 * 24 * 3600 * 1000;
+  const lastQuestionTime = +(localStorage.getItem(LS_KEY) || -ONE_WEEK);
+  const isShowQuestion = new Date().getTime() - lastQuestionTime >= ONE_WEEK;
+  console.log('lastQuestionTime',lastQuestionTime, 'isShowQuestion', isShowQuestion);
   return {type: isShowQuestion ? SHOW_DX_QUESTION: 'HIDE_DX_QUESTION'};
 }
 //
@@ -24,7 +25,7 @@ function requestSaveAnswer(answer){
 }
 
 function receiveSaveAnswer(jsonEntity){
-  const ISO_DATE = new Date().toISOString();
+  const ISO_DATE = new Date().getTime();
   localStorage.setItem(LS_KEY, ISO_DATE);
   return {type: RECEIVE_SAVE_ANSWER, payload: jsonEntity};
 }
