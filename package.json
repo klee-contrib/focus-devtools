@@ -7,7 +7,7 @@
     "test": "BABEL_ENV=test mocha src/**/__tests__/**/*.js",
     "test:watch": "BABEL_ENV=test mocha src/**/__tests__/**/*.js --watch",
     "start": "better-npm-run dev-server",
-    "build": "BABEL_ENV=production node scripts/babelify.js",
+    "build": "node scripts/babelify.js",
     "bundle": "better-npm-run bundle ",
     "prepublish": "npm run build && npm run bundle"
   },
@@ -28,6 +28,7 @@
       "command": "node ./server.js",
       "env": {
         "DEV": true,
+        "BABEL_ENV": "developement",
         "SOURCE_MAPS": false,
         "ENTRY_FILE_PATH": "./src/example/index",
         "PAGE_TITLE": "Focus entity dev page",
@@ -41,6 +42,7 @@
       "command": "webpack --progress",
       "env": {
         "DEV": false,
+        "BABEL_ENV": "production",
         "NODE_ENV": "production",
         "LIBRARY_NAME": "FocusDevTools",
         "MINIMIFY": false,
