@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                     project='focus_devtools'
                     toggleVisibilityKey='ctrl-m'
                     routes={routes}
-                    getStores={() => strs}
+                    getStores={() => stores}
                     isDebugDevTools={false}
                   />
               </main>
