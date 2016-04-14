@@ -16,10 +16,11 @@ const Grade = ({value, maxGrade, onChange, onClick, onSend, iconName, contentWid
         <Button style={{width: '20%'}} isColored={true} type='raised' onClick={()=>{onSend()}}><Icon>send</Icon></Button>
       </div>
       <div style={{width: '100%', alignItems: 'center', textAlign: 'center'}}>
-        <pre>{
-          `Click on a star to rate your experience with focus over 5...
-Thanks for your feedback!`
-        }</pre>
+        <h4>Pouvez vous noter votre expérience avec Focus sur 5 en cliquant sur l'étoile correspondante.</h4>
+        <p>Merci pour votre aide!</p>
+        <h5>Pourquoi est ce que nous vous demandons cette information?</h5>
+        <p>Une fois par semaine nous allons pousser cette question dans les devtools afin de pouvoir avoir du feedback continue de la part des projets.</p>
+        <p>Ce feedback est extrèmement important pour nous afin de pouvoir agir pour améliorer votre expérience avec les outils focus.</p>
       </div>
     </div>
   );
@@ -29,7 +30,7 @@ Grade.displayName = 'Grade';
 Grade.defaultProps = {
   maxGrade: 5,
   iconName: 'star',
-  value: 0,
+  value: 3,
   title: 'Notez Focus'
 }
 

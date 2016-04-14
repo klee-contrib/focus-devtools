@@ -7,10 +7,11 @@ export const DX_QUESTION_NEW_RESPONSES = 'DX_QUESTION_NEW_RESPONSES';
 
 
 export function initQuestion(){
-  const ONE_WEEK = 7 * 24 * 3600 * 1000;
-  const lastQuestionTime = +(localStorage.getItem(LS_KEY) || -ONE_WEEK);
-  const isShowQuestion = new Date().getTime() - lastQuestionTime >= ONE_WEEK;
-  console.log('lastQuestionTime',lastQuestionTime, 'isShowQuestion', isShowQuestion);
+  const INTERVAL_BETWEEN_QUESTIONS = 7 * 24 * 3600 * 1000;
+  const NOW = new Date().getTime();
+  const lastQuestionTime = +(localStorage.getItem(LS_KEY) || 0);
+  const isShowQuestion = (NOW - lastQuestionTime) >= INTERVAL_BETWEEN_QUESTIONS;
+  //console.log('lastQuestionTime',lastQuestionTime, 'isShowQuestion', isShowQuestion);
   return {type: isShowQuestion ? SHOW_DX_QUESTION: 'HIDE_DX_QUESTION'};
 }
 //
@@ -25,8 +26,8 @@ function requestSaveAnswer(answer){
 }
 
 function receiveSaveAnswer(jsonEntity){
-  const ISO_DATE = new Date().getTime();
-  localStorage.setItem(LS_KEY, ISO_DATE);
+  const NOW = new Date().getTime();
+  localStorage.setItem(LS_KEY, NOW);
   return {type: RECEIVE_SAVE_ANSWER, payload: jsonEntity};
 }
 
@@ -37,11 +38,12 @@ function errorSaveAnswer(error){
 export function saveAnswer(project, answer){
   return async dispatch => {
     try{
-      console.log('save', project, answer);
+      //console.log('saving', project, answer);
       dispatch(requestSaveAnswer(answer));
-      const response = await saveAnswerSvc(project, answer);
-      const data = await response;
-      dispatch(receiveSaveAnswer(data));
+      const response = saveAnswerSvc(project, answer).then(d => {
+        //console.log('saved', project, answer, d);
+        dispatch(receiveSaveAnswer(response));
+      }, e => {console.error(e)});
     }
     catch(err){
       dispatch(errorSaveAnswer(err));

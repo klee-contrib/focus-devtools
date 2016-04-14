@@ -6,6 +6,7 @@ import FocusDevToolsContent from './components/focus-dev-tools';
 import DevPanel from './components/dev-panel';
 import  FocusDevDock from './components/focus-dev-dock';
 import logger from './logger/dispatch-logger';
+import {init as initFirebase} from './service/firebase'; 
 
 let USER;
 try{
@@ -34,6 +35,7 @@ FocusDevToolsPanel.displayName = 'FocusDevToolsPanel';
 
 
 const FocusDevTools = (props) => {
+  initFirebase();
   const DevTools = props.isPanel ? FocusDevToolsPanel : FocusDevToolsContent;
   return (
     <DevPanel project={props.project} user={props.user}>

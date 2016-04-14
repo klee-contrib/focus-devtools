@@ -59,9 +59,10 @@ class FocusDevTools extends Component {
       this.setState({grade: value});
   }
   setAnswer(value){
-    console.log('answser', value);
+    //console.log('answser', value);
   }
   onSend(){
+    //console.log('onSend', this.state.grade);
     this.props.dispatch(this.props.sendGrade(this.state.grade));
   }
 
@@ -97,6 +98,7 @@ class FocusDevTools extends Component {
   }
 }
 FocusDevTools.defaultProps = {
+  grade: 3,
   isQuestionVisible: false,
   isRoutesVisible: true,
   isFluxStoresVisible: false,

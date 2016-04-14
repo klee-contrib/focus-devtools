@@ -15,7 +15,7 @@ const switchStyle = {
 };
 
 const SwitchActivator = ({title,mode, iconName, onFluxStoreClick, onRoutesClick}) => {
-  const text = mode === 'question' ? 'Which grade for focus ?': mode;
+  const text = mode === 'question' ? 'vous et focus?': mode;
   return (
     <div style={switchStyle}>
       <h4 style={{margin: 10}}>{title}</h4>

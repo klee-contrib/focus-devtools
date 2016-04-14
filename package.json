@@ -1,52 +1,41 @@
 {
   "name": "focus-devtools",
-  "version": "0.3.5",
+  "version": "0.4.0",
   "description": "Focus devtools",
   "main": "index.js",
   "scripts": {
     "test": "BABEL_ENV=test mocha src/**/__tests__/**/*.js",
     "test:watch": "BABEL_ENV=test mocha src/**/__tests__/**/*.js --watch",
     "start": "better-npm-run dev-server",
-    "build": "node scripts/babelify.js",
+    "build": "BABEL_ENV=production node scripts/babelify.js",
     "bundle": "better-npm-run bundle ",
     "prepublish": "npm run build && npm run bundle"
   },
-  "files": [
-    "dist",
-    "lib",
-    "src",
-    "index.js",
-    "actions",
-    "components",
-    "logger",
-    "reducers",
-    "store",
-    "service"
-  ],
+  "files": ["dist", "lib", "src", "index.js","actions","components", "logger", "reducers", "store", "service"],
   "betterScripts": {
     "dev-server": {
       "command": "node ./server.js",
       "env": {
         "DEV": true,
-        "BABEL_ENV": "developement",
         "SOURCE_MAPS": false,
         "ENTRY_FILE_PATH": "./src/example/index",
         "PAGE_TITLE": "Focus entity dev page",
         "MINIMIFY": false,
         "API_PORT": 9999,
         "PACKAGE_JSON_PATH": "../",
-        "ANCHOR_CLASS": "entity-example"
+        "ANCHOR_CLASS": "entity-example",
+        "BABEL_ENV":"production"
       }
     },
     "bundle": {
       "command": "webpack --progress",
       "env": {
         "DEV": false,
-        "BABEL_ENV": "production",
         "NODE_ENV": "production",
         "LIBRARY_NAME": "FocusDevTools",
         "MINIMIFY": false,
-        "PACKAGE_JSON_PATH": "../"
+        "PACKAGE_JSON_PATH": "../",
+        "BABEL_ENV":"production"
       }
     }
   },
@@ -72,7 +61,7 @@
     "babel-eslint": "^4.1.8",
     "babel-loader": "^6.2.2",
     "babel-polyfill": "^6.5.0",
-    "babel-preset-focus": "^0.5.2",
+    "babel-preset-focus": "^0.3.1",
     "better-npm-run": "0.0.6",
     "body-parser": "^1.14.2",
     "chai": "^3.5.0",
@@ -83,7 +72,6 @@
     "faker": "^3.0.1",
     "file-loader": "^0.8.5",
     "html-webpack-plugin": "^2.8.1",
-    "isomorphic-fetch": "^2.2.1",
     "json-loader": "^0.5.4",
     "lodash": "^4.2.1",
     "material-design-icons-iconfont": "^2.0.4",
@@ -105,12 +93,13 @@
     "webpack-focus": "^0.10.1"
   },
   "dependencies": {
-    "react-dock": "^0.2.3",
-    "react-json-tree": "^0.5.6",
-    "react-redux": "^4.3.0",
+    "isomorphic-fetch": "^2.2.1",
     "redux": "^3.2.1",
-    "redux-logger": "^2.5.0",
+    "react-redux": "^4.3.0",
+    "react-json-tree": "^0.5.6",
     "redux-thunk": "^1.0.3",
+    "react-dock": "^0.2.3",
+    "redux-logger": "^2.5.0",
     "parse-key": "^0.2.1",
     "firebase": "^2.4.1"
   }

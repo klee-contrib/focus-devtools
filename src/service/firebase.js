@@ -14,10 +14,11 @@ export const populate = (isPopulate = true) => {
 }
 
 export const init = (/*{onValue, onChildAdded}*/next =  ()=>{}) => {
+  if(fb){return;}
   fb = new Firebase(URL);
   fb.on('value', sn => {
     snapShot = sn;
-    console.log('snapshot value', sn.val())
+    //console.log('snapshot value', sn.val())
     //onValue(sn);
     next();
   });
