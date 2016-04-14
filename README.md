@@ -9,9 +9,9 @@ The purpose of these dev tools is to provide help for your focus projects:
 - Store data and store state
 
 ![image](https://cloud.githubusercontent.com/assets/286966/14531293/fe02b3f0-025c-11e6-983d-98da63b0431b.png)
-You can explorer all your stores data.
+You can explore all your stores data.
 
-- Routes informations
+- Routes information
 
 ![image](https://cloud.githubusercontent.com/assets/286966/14531339/3a65c92c-025d-11e6-9ab8-371e8cbe4734.png)
 You can list all your routes and click on them.
