@@ -1,15 +1,27 @@
 # Focus dev tools
 
+By default to display it press `ctrl+m` on your keyboard.
+
 The purpose of these dev tools is to provide help for your focus projects:
 
 - Store data and store state
+
+![image](https://cloud.githubusercontent.com/assets/286966/14531293/fe02b3f0-025c-11e6-983d-98da63b0431b.png)
+You can explorer all your stores data.
+
 - Routes informations
 
+![image](https://cloud.githubusercontent.com/assets/286966/14531339/3a65c92c-025d-11e6-9ab8-371e8cbe4734.png)
+You can list all your routes and click on them.
+
 Its purpose is also to allow us to collect some __satisfaction__ indicators.
+![image](https://cloud.githubusercontent.com/assets/286966/14531303/1814fe4c-025d-11e6-856c-dd8675a1827d.png)
+
+> Please provide some feedback
 
 Here is a short video demo of this tool
 
-[A video of the component in action](https://youtu.be/XuaWkIbWR-A)
+[A video of the component in action](https://youtu.be/lEBuPIyjJeo)
 <iframe width="560" height="315" src="https://www.youtube.com/embed/XuaWkIbWR-A" frameborder="0" allowfullscreen></iframe>
 
 ## How to use it
@@ -26,7 +38,7 @@ import CoreStore from 'focus-core/stores/CoreStore'
 dispatchLogger(dispatcher, () => CoreStore._instances);
 ```
 
-- A `FocusDevTools` console to visualize information
+- A `FocusDevTools` console to visualize information, create a container component in your project.
 
 ``` jsx
 
@@ -41,3 +53,24 @@ import FocusDevTools from 'focus-dev-tools';
   isDebugDevTools={false} /* If you want to display the dev tools props (not usefull for the projects)*/
 />
 ```
+It has to be included in the Layout of the application, as an example in the starter kit and the demo app there is a `layout-initializer`
+```javascript
+import React from 'react';
+import render from 'focus-core/application/render';
+import Layout from 'focus-components/components/layout';
+import DemoMenuLeft from '../../views/menu/menu-left';
+import DemoFooter from '../../views/footer';
+import DevTools from '../../components/dev-tools';
+export default () => {
+    console.info('|--- LAYOUT');
+
+    const CustomLayout = (props) => {
+      return <div><Layout MenuLeft={DemoMenuLeft} Footer={DemoFooter} /> <DevTools/></div>
+    }
+
+    render(CustomLayout, `.${__ANCHOR_CLASS__}`);
+}
+```
+where DevTools is the container component you just create.
+
+> We hope this will help you and improve your experience with focus.
