@@ -1,5 +1,7 @@
 # Focus dev tools
 
+Install it with `npm install focus-devtools -S`
+
 By default to display it press `ctrl+m` on your keyboard.
 
 The purpose of these dev tools is to provide help for your focus projects:
