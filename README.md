@@ -44,34 +44,42 @@ dispatchLogger(dispatcher, () => CoreStore._instances);
 
 ``` jsx
 
-import FocusDevTools from 'focus-dev-tools';
-<FocusDevTools
-  isPanel={true} /* If you want to embed the component in a DOck */
-  user='Your name' /*can be set by an env variable*/
-  project='focus_devtools' /*can be set by an env variable*/
-  toggleVisibilityKey='ctrl-m'  /*How do you want to display the dev tool*/
-  routes={routes}  /* A list of all your routes (`focus-core/router/history`)*/
-  stores={strs} /* A list of all your stores (`focus-core/CoreStore._instances`)*/
-  isDebugDevTools={false} /* If you want to display the dev tools props (not usefull for the projects)*/
-/>
+import FocusDevTools from 'focus-devtools';
+import React from 'react';
+import history from 'focus-core/history';
+import CoreStore from 'focus-core/store/CoreStore'
+
+
+const devTools = () => <FocusDevTools
+                        isPanel /* If you want to embed the component in a DOck */
+                        toggleVisibilityKey={'ctrl-m'}  /*How do you want to display the dev tool*/
+                        routes={history.handlers}  /* A list of all your routes (`focus-core/router/history`)*/
+                        getStores={() => CoreStore.prototype._instances} /* A list of all your stores (`focus-core/CoreStore._instances`)*/
+                        isDebugDevTools={false} /* If you want to display the dev tools props (not usefull for the projects)*//* If you want to display the dev tools props (not usefull for the projects)*/
+                         />
+
+export default devTools;
 ```
 It has to be included in the Layout of the application, as an example in the starter kit and the demo app there is a `layout-initializer`
 ```javascript
 import React from 'react';
-import render from 'focus-core/application/render';
 import Layout from 'focus-components/components/layout';
-import DemoMenuLeft from '../../views/menu/menu-left';
-import DemoFooter from '../../views/footer';
-import DevTools from '../../components/dev-tools';
-export default () => {
-    console.info('|--- LAYOUT');
+import MenuLeft from '../../views/menu/menu-left';
+import DevTools from '../dev-tools';
 
-    const CustomLayout = (props) => {
-      return <div><Layout MenuLeft={DemoMenuLeft} Footer={DemoFooter} /> <DevTools/></div>
-    }
 
-    render(CustomLayout, `.${__ANCHOR_CLASS__}`);
-}
+const CustomLayout = (props) => (
+        <div>
+          <Layout
+              MenuLeft={MenuLeft}
+          >
+          {props.children}
+          </Layout>
+          <DevTools/>
+        </div>
+);
+
+export default CustomLayout;
 ```
 where DevTools is the container component you just create.
 
