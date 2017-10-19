@@ -9,4 +9,4 @@ branches:
   - develop
 cache:
   directories:
-- node_modules
+  - node_modules
