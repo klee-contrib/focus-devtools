@@ -6,6 +6,8 @@
 /store/*
 /service/*
 /index.js
+.history
+.cache-loader
 
 # Logs
 logs
