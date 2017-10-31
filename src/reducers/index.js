@@ -1,10 +1,8 @@
 import { combineReducers } from 'redux';
-import  settings from './dev-tools-settings-reducer';
-import  pushQuestion from './push-question-reducer';
+import settings from './dev-tools-settings-reducer';
 
 const devToolsReducer = combineReducers({
-  settings: settings,
-  pushQuestion: pushQuestion
+    settings: settings
 });
 
 export default devToolsReducer;

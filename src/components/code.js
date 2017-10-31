@@ -1,14 +1,14 @@
-import React, {PropTypes} from 'react';
+import React, { PropTypes } from 'react';
 
-function Code(props){
-  return (
-    <pre>
-      <h4>Your props</h4>
-      <code>
-        {JSON.stringify(props, null, 2)}
-      </code>
-    </pre>
-  );
+function Code(props) {
+    return (
+        <pre>
+            <h4>Your props</h4>
+            <code>
+                {JSON.stringify(props, null, 2)}
+            </code>
+        </pre>
+    );
 }
 
 

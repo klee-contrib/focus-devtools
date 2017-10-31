@@ -1,6 +1,13 @@
 # Focus dev tools
 
-Install it with `npm install focus-devtools -S`
+[![master](https://travis-ci.org/KleeGroup/focus-devtools.svg?branch=master)](https://travis-ci.org/KleeGroup/focus-devtools)
+[![develop](https://travis-ci.org/KleeGroup/focus-focus-devtools.svg?branch=develop)](https://travis-ci.org/KleeGroup/focus-devtools)
+
+[![Dependencies Status](https://david-dm.org/KleeGroup/focus-devtools.svg)](https://david-dm.org/KleeGroup/focus-devtools)
+[![Dev Dependencies Status](https://david-dm.org/KleeGroup/focus-devtools/dev-status.svg)](https://david-dm.org/KleeGroup/focus-devtools?type=dev)
+[![Peer Dependencies Status](https://david-dm.org/KleeGroup/focus-devtools/peer-status.svg)](https://david-dm.org/KleeGroup/focus-devtools?type=peer)
+
+Install it with `npm install focus-devtools -D`
 
 By default to display it press `ctrl+m` on your keyboard.
 
