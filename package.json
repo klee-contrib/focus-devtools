@@ -4,7 +4,8 @@
     "description": "Focus devtools",
     "main": "index.js",
     "scripts": {
-        "build": "better-npm-run babelify"
+        "build": "better-npm-run babelify",
+        "test": "npm run build"
     },
     "betterScripts": {
         "babelify": {
@@ -40,7 +41,9 @@
         "react-dom": "15.4.2"
     },
     "devDependencies": {
-        "babel-preset-focus": "1.0.0-beta1",
+        "babel-cli": "6.26.0",
+        "babel-preset-focus": "1.0.0",
+        "better-npm-run": "0.1.0",
         "eslint-config-focus": "0.6.0",
         "react": "15.4.2",
         "react-dom": "15.4.2"
