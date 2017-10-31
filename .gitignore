@@ -1,11 +1,3 @@
-/actions/*
-/components/*
-/dist/*
-/logger/*
-/reducers/*
-/store/*
-/service/*
-/index.js
 .history
 .cache-loader
 
