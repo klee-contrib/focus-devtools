@@ -1,4 +1,5 @@
-import React, { cloneElement, Children, Component, PropTypes } from 'react';
+import PropTypes from 'prop-types';
+import React, { cloneElement, Children, Component } from 'react';
 import { connect as connectToReduxStore } from 'react-redux';
 import { toggleVisibility } from '../actions/dev-tools-settings-actions';
 import Dock from 'react-dock';

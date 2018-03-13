@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import PropTypes from 'prop-types';
+import React from 'react';
 import RouteDX from './route';
 import JSONTree from 'react-json-tree';
 

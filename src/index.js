@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 import { Provider as StoreProvider } from 'react-redux';
 import store from './store';
 import FocusDevToolsContent from './components/focus-dev-tools';
