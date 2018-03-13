@@ -1,5 +1,7 @@
 // react and redux utils
-import React, { Component, PropTypes } from 'react';
+import PropTypes from 'prop-types';
+
+import React, { Component } from 'react';
 import { connect as connectToReduxStore } from 'react-redux';
 import SwitchActivator from './settings/switch-activator';
 // get internal components

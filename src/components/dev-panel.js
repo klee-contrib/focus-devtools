@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import PropTypes from 'prop-types';
+import React from 'react';
 
 //Component
 const DevPanel = ({ children, project, user }) => <div data-project={project} data-user={user}>{children}</div>;
